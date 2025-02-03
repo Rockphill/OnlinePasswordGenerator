@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Password Generator</title>
+  <style>
+    /* ... предыдущие стили ... */
+
+    /* Добавим стили для индикатора загрузки */
+    .loading {
+      display: none;
+      margin-left: 10px;
+    }
+
+    /* Стили для сообщений об ошибках */
+    .error {
+      color: red;
+      display: none;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Password Generator</h1>
+  <form id="passwordForm">
+    <div class="form-group">
+      <label for="length">Password Length (8-12):</label>
+      <input type="number" id="length" name="length" min="8" max="12" value="8" required>
+    </div>
+    <div class="form-group">
+      <label for="special">Include Special Characters:</label>
+      <input type="checkbox" id="special" name="special" value="true">
+    </div>
+    <button type="submit">Generate Password</button>
+    <span class="loading">Generating...</span>
+  </form>
+  <h2>Generated Password:</h2>
+  <p id="result"></p>
+  <p class="error" id="errorMessage"></p>
+</div>
+<script>
+  document.getElementById('passwordForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const length = form.length.value;
+    const special = form.special.checked ? 'true' : 'false';
+    const loading = document.querySelector('.loading');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Показываем индикатор загрузки
+    loading.style.display = 'inline';
+    errorMessage.style.display = 'none';
+
+    fetch('/generate?length=' + length + '&special=' + special)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.text();
+            })
+            .then(password => {
+              document.getElementById('result').innerText = password;
+            })
+            .catch(error => {
+              errorMessage.innerText = 'Error generating password. Please try again.';
+              errorMessage.style.display = 'block';
+              document.getElementById('result').innerText = '';
+            })
+            .finally(() => {
+              loading.style.display = 'none';
+            });
+  });
+</script>
+</body>
+</html>
