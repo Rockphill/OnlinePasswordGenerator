@@ -25,7 +25,7 @@ A secure and flexible password generator service built with Go, featuring a clea
 - 🔄 Easy scaling with Docker Compose
 
 ## 🛠 Technical Stack
-- **Backend**: Go 1.21+
+- **Backend**: Go 1.23+
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Container**: Docker
 - **Web Server**: Native Go HTTP Server
