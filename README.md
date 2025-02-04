@@ -1,6 +1,6 @@
 # Password Generator Service
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?logo=go)
+![Go Version](https://img.shields.io/badge/Go-1.23+-00ADD8?logo=go)
 ![Last Updated](https://img.shields.io/badge/last%20updated-2025--02--04-brightgreen)
 ![Author](https://img.shields.io/badge/author-Rockphill-orange)
 
